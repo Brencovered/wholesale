@@ -9,7 +9,6 @@ export default function HomePage() {
   const categories = listCategories();
 
   return (
-<<<<<<< HEAD
     <div className="mx-auto max-w-6xl px-4 md:px-6 space-y-10">
       <section className="grid gap-6 md:grid-cols-[1.05fr,0.95fr] items-stretch">
         <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
@@ -50,60 +49,6 @@ export default function HomePage() {
                   {c.label}
                 </Link>
               ))}
-=======
-    <div className="page">
-      <section className="hero">
-        <h1>Find fresh food near you</h1>
-        <p>
-          Local Pantry connects Melbourne consumers to independent fruit & veg shops,
-          butchers, seafood markets, delis, wholesalers. Support local, buy better.
-        </p>
-
-        <div className="searchCard">
-          <SearchForm />
-
-          <div className="chips" aria-label="Browse categories">
-            {categories.map((category) => (
-              <Link key={category.key} href={`/search?category=${category.key}`}>
-                {category.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <h2>Browse by Category</h2>
-        <p>Choose a category above or search by postcode to find local vendors.</p>
-      </section>
-
-      <section className="section" aria-labelledby="how">
-        <h2 id="how">How it works</h2>
-        <p>Simple, vendor-first, designed to build the local food network.</p>
-
-        <div className="steps">
-          <div className="step">
-            <div className="stepNum">1</div>
-            <div>
-              <h3>Search local</h3>
-              <p>Search by postcode and category.</p>
-            </div>
-          </div>
-
-          <div className="step">
-            <div className="stepNum">2</div>
-            <div>
-              <h3>Pick vendors</h3>
-              <p>Compare specials and add what you need.</p>
-            </div>
-          </div>
-
-          <div className="step">
-            <div className="stepNum">3</div>
-            <div>
-              <h3>Pickup or delivery</h3>
-              <p>Checkout for pickup or delivery when offered.</p>
->>>>>>> aa2eb25 (Add vendor admin, CSV import, basket flow, and layout fixes)
             </div>
           </div>
         </div>
