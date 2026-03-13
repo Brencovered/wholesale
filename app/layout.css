@@ -297,7 +297,7 @@ button.primaryBtn {
   font-size: 14px;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════��═══
    SEARCH FORM
    ═══════════════════════════════════════════════════════════════ */
 
@@ -379,6 +379,413 @@ button.primaryBtn {
    RESPONSIVE
    ═══════════════════════════════════════════════════════════════ */
 
+/* ═══════════════════════════════════════════════════════════════
+   FORMS & INPUTS
+   ═══════════════════════════════════════════════════════════════ */
+
+.formCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: var(--space-xl);
+}
+
+.formSection {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.formSection:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.formSectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: var(--space-md);
+}
+
+.formGrid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.formGrid.cols2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.formGrid.cols3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.formLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.formInput,
+.formSelect,
+.formTextarea,
+input.formInput,
+select.formSelect,
+textarea.formTextarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  background: var(--color-paper-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-ink);
+  transition: all 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: var(--color-ink);
+  background: var(--color-white);
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.05);
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: var(--color-ink-muted);
+}
+
+.formTextarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formSelect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23525252' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+}
+
+.formHint {
+  font-size: 13px;
+  color: var(--color-ink-muted);
+  margin-top: var(--space-xs);
+}
+
+.formActions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+/* Page Header */
+.pageHeader {
+  margin-bottom: var(--space-xl);
+}
+
+.pageTitle {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin-bottom: var(--space-sm);
+}
+
+.pageSubtitle {
+  font-size: 16px;
+  color: var(--color-ink-soft);
+  line-height: 1.6;
+}
+
+/* Stats Cards */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.statCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: var(--space-lg);
+}
+
+.statLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.statValue {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-top: var(--space-xs);
+}
+
+/* Vendor Grid */
+.vendorGrid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.vendorCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.vendorCard:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.vendorCard img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.vendorCardBody {
+  padding: var(--space-md);
+}
+
+.vendorCard h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+
+.vendorCard p {
+  font-size: 14px;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+/* Two Column Layout */
+.twoColLayout {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .twoColLayout {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Sidebar Card */
+.sidebarCard {
+  background: var(--color-paper-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  height: fit-content;
+}
+
+.sidebarCard h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.sidebarCard p {
+  font-size: 14px;
+  color: var(--color-ink-soft);
+  line-height: 1.6;
+}
+
+/* Pills/Tags */
+.pillRow {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-top: var(--space-md);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 100px;
+  background: var(--color-paper-alt);
+  color: var(--color-ink-soft);
+}
+
+.pill.green {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.pill.yellow {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.pill.orange {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+/* Basket Items */
+.basketItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--space-md);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.basketItemInfo h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+
+.basketItemInfo p {
+  font-size: 14px;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.basketItemPrice {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.basketTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg);
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-radius: 12px;
+  margin-top: var(--space-md);
+}
+
+.basketTotal h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.basketTotal .totalAmount {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-lg);
+  background: var(--color-paper-alt);
+  border-radius: 16px;
+}
+
+.emptyState h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+.emptyState p {
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-lg);
+}
+
+/* Login/Auth Card */
+.authCard {
+  max-width: 440px;
+  margin: var(--space-3xl) auto;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: var(--space-xl);
+}
+
+.authCard .authHeader {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.authCard .authHeader h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.authCard .authHeader p {
+  color: var(--color-ink-soft);
+  font-size: 15px;
+}
+
+.authCard .formGroup {
+  margin-bottom: var(--space-md);
+}
+
+.authCard .formActions {
+  flex-direction: column;
+  margin-top: var(--space-xl);
+}
+
+.authCard .divider {
+  text-align: center;
+  color: var(--color-ink-muted);
+  font-size: 13px;
+  margin: var(--space-md) 0;
+}
+
+/* Filter Bar */
+.filterBar {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-end;
+  flex-wrap: wrap;
+  padding: var(--space-lg);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  margin-bottom: var(--space-xl);
+}
+
+.filterBar .formGroup {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
 @media (max-width: 768px) {
   .topbar {
     flex-direction: column;
@@ -418,5 +825,19 @@ button.primaryBtn {
   
   .page {
     padding: var(--space-lg) var(--space-md);
+  }
+  
+  .formGrid.cols2,
+  .formGrid.cols3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .filterBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filterBar .formGroup {
+    width: 100%;
   }
 }
