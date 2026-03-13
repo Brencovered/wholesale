@@ -7,14 +7,29 @@ export type Product = {
   description?: string;
 };
 
+export type FulfillmentOptions = {
+  pickup: boolean;
+  delivery: boolean;
+  deliveryRadiusKm?: number;
+  deliveryFee?: number;
+  minOrderDelivery?: number;
+};
+
 export type Vendor = {
   id: string;
   name: string;
   suburb: string;
   postcode: string;
+  address?: string;
   category: string;
   description?: string;
   image?: string;
+  logo?: string;
+  phone?: string;
+  email?: string;
+  website?: string;
+  openingHours?: string;
+  fulfillment: FulfillmentOptions;
   products: Product[];
 };
 
