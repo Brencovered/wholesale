@@ -1,37 +1,72 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function VendorDashboardPage() {
   return (
-    <div className="space-y-6">
-      <div className="rounded border border-slate-200 bg-white p-4">
-        <h1 className="text-lg font-semibold text-slate-900">Dashboard</h1>
-        <p className="mt-1 text-sm text-slate-700">
-          Keep your store updated. Add stock, update pricing, upload images, and publish deals.
-        </p>
-        <div className="mt-3 flex gap-2">
-          <Link href="/vendor/dashboard/products/new" className="rounded bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800">
-            Add product
-          </Link>
-          <Link href="/vendor/dashboard/orders" className="rounded border border-slate-200 px-3 py-2 text-sm hover:bg-slate-50">
-            View orders
-          </Link>
-        </div>
-      </div>
+    <div className="page">
+      <header className="pageHeader">
+        <h1>Vendor dashboard</h1>
+        <p className="muted">Manage stock, pricing, deals, and pickup orders.</p>
+      </header>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded border border-slate-200 bg-white p-4">
-          <h2 className="text-md font-semibold text-slate-900">Quick actions</h2>
-          <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-slate-700">
-            <li>Update daily specials</li>
-            <li>Upload product images</li>
-            <li>Publish nutrition guides</li>
-          </ul>
+      <section className="grid threeCol stats">
+        <div className="card">
+          <div className="cardInner">
+            <div className="kpi">2</div>
+            <div className="muted">products</div>
+          </div>
         </div>
-        <div className="rounded border border-slate-200 bg-white p-4">
-          <h2 className="text-md font-semibold text-slate-900">Performance</h2>
-          <p className="mt-2 text-sm text-slate-700">Placeholder analytics: views, searches, checkout starts.</p>
+        <div className="card">
+          <div className="cardInner">
+            <div className="kpi">0</div>
+            <div className="muted">pending pickup orders</div>
+          </div>
         </div>
-      </div>
+        <div className="card">
+          <div className="cardInner">
+            <div className="kpi">$12</div>
+            <div className="muted">subscription</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="grid twoCol">
+        <div className="card">
+          <div className="cardInner">
+            <h2 className="sectionTitle">Quick actions</h2>
+
+            <div className="actionRow">
+              <Link className="primaryBtn" href="/vendor/dashboard/products/new">
+                Add stock
+              </Link>
+              <Link className="secondaryBtn" href="/vendor/dashboard/orders">
+                View orders
+              </Link>
+              <Link className="secondaryBtn" href="/vendor/parkigrocer">
+                View store page
+              </Link>
+            </div>
+
+            <p className="muted">
+              Upload images, nutritional info and daily deals. Deals show up in search results.
+            </p>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="cardInner">
+            <h2 className="sectionTitle">Deals preview</h2>
+            <p className="muted">Keep your deals fresh. Deals appear in search results.</p>
+
+            <ul className="list">
+              <li className="listItem">
+                <span className="pill orange">Deal</span>
+                <strong>Strawberries</strong>
+                <span className="muted">$2.00 punnet</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }

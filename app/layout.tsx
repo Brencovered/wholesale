@@ -1,41 +1,63 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import "./layout.css";
 import Link from "next/link";
+import type { ReactNode } from "react";
+import { CartProvider } from "./components/CartProvider";
+import NavCartLink from "./components/NavCartLink";
 
-export const metadata: Metadata = {
-  title: "Local Food Marketplace",
-  description: "Discover local fruit & veg shops, butchers, seafood and specialty grocers near you.",
+export const metadata = {
+  title: "Local Pantry",
+  description: "Your local food network",
 };
 
-function TopNav() {
-  return (
-    <header className="bg-white border-b border-slate-200">
-      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="font-semibold tracking-tight text-slate-900">
-          Local Food Marketplace
-        </Link>
-        <nav className="flex gap-4 text-sm text-slate-700">
-          <Link href="/search" className="hover:text-slate-900">
-            Search
-          </Link>
-          <Link href="/account" className="hover:text-slate-900">
-            Account
-          </Link>
-          <Link href="/vendor/login" className="hover:text-slate-900">
-            Vendor Login
-          </Link>
-        </nav>
-      </div>
-    </header>
-  );
-}
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <TopNav />
-        <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
+        <CartProvider>
+          <header className="siteHeader">
+            <div className="shell">
+              <div className="topbar">
+                <Link href="/" className="brand brandLink">
+                  <div className="brandMark" />
+                  <div>
+                    <div className="brandTitle">Local Pantry</div>
+                    <div className="brandSub">Your local food network</div>
+                  </div>
+                </Link>
+
+                <nav className="nav" aria-label="Primary">
+                  <ul className="navList">
+                    <li>
+                      <Link href="/search" className="navPill">
+                        Search vendors
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/account" className="navPill">
+                        Account
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/vendor/login" className="navPill">
+                        Vendor login
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/admin" className="navPill">
+                        Admin
+                      </Link>
+                    </li>
+                    <li>
+                      <NavCartLink />
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </header>
+
+          <main className="main">{children}</main>
+        </CartProvider>
       </body>
     </html>
   );

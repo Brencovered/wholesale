@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import type { Vendor, Product } from "../../lib/vendors-shared";
+import type { Vendor } from "../../lib/vendors-shared";
 import { useCart } from "../../components/CartProvider";
 
 export default function VendorPage() {
@@ -22,15 +22,13 @@ export default function VendorPage() {
         setError("");
 
         const res = await fetch(`/api/vendors/${vendorId}`);
+
         if (!res.ok) {
           throw new Error("Vendor not found");
         }
 
         const data = await res.json();
-        setVendor({
-          ...data,
-          products: Array.isArray(data.products) ? data.products : [],
-        });
+        setVendor(data);
       } catch (err) {
         console.error(err);
         setError("Could not load vendor.");
@@ -44,7 +42,7 @@ export default function VendorPage() {
     }
   }, [vendorId]);
 
-  function handleAddToBasket(product: Product) {
+  function handleAddToBasket(product: Vendor["products"][number]) {
     addItem({
       productId: product.id,
       name: product.name,
@@ -54,7 +52,7 @@ export default function VendorPage() {
 
     setMessage(`${product.name} added to basket`);
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       setMessage("");
     }, 1800);
   }
@@ -117,7 +115,6 @@ export default function VendorPage() {
                 {product.description ? (
                   <p style={{ marginBottom: 8 }}>{product.description}</p>
                 ) : null}
-
                 <p style={{ fontWeight: 800, fontSize: 18, marginBottom: 12 }}>
                   ${Number(product.price).toFixed(2)}
                 </p>

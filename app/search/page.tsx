@@ -1,75 +1,74 @@
-import Link from "next/link";
-import { searchVendors, type Category } from "../lib/vendors";
-import SearchForm from "../components/SearchForm";
+import { searchVendors } from "../lib/vendors";
+import { listCategories, type Category } from "../lib/vendors-shared";
 
-export default function SearchPage({
-  searchParams,
-}: {
-  searchParams?: { postcode?: string; category?: string };
-}) {
-  const postcode = searchParams?.postcode || "";
-  const category = (searchParams?.category || "") as Category;
-  const results = searchVendors({ postcode, category });
+type SearchPageProps = {
+  searchParams?: {
+    postcode?: string;
+    category?: string;
+  };
+};
+
+export default function SearchPage({ searchParams }: SearchPageProps) {
+  const postcode = searchParams?.postcode?.trim() ?? "";
+  const categoryRaw = (searchParams?.category ?? "").toLowerCase();
+
+  const categories = listCategories();
+  const allowedCategoryKeys = new Set(categories.map((c) => c.key));
+
+  const category: Category | null = allowedCategoryKeys.has(categoryRaw as Category)
+    ? (categoryRaw as Category)
+    : null;
+
+  const vendors = searchVendors({
+    postcode,
+    category: category === "all" ? undefined : category ?? undefined,
+  });
 
   return (
-    <div className="space-y-6">
-      <div className="rounded border border-slate-200 bg-white p-4">
-        <h1 className="text-lg font-semibold text-slate-900">Search</h1>
-        <p className="mt-1 text-sm text-slate-700">Search by postcode and category.</p>
-        <div className="mt-3">
-          <SearchForm initialPostcode={postcode} initialCategory={category} />
-        </div>
+    <main style={{ padding: 24 }}>
+      <h1>Search vendors</h1>
+
+      <div style={{ marginTop: 16, marginBottom: 24 }}>
+        <p>
+          <strong>Postcode:</strong> {postcode || "Any"}
+        </p>
+        <p>
+          <strong>Category:</strong>{" "}
+          {categories.find((c) => c.key === (category ?? "all"))?.label ?? "All categories"}
+        </p>
       </div>
 
-      <section>
-        <div className="mb-3 flex items-end justify-between">
-          <h2 className="text-md font-semibold text-slate-900">Results</h2>
-          <p className="text-sm text-slate-600">{results.length} vendors</p>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2">
-          {results.map((v) => (
-            <article key={v.id} className="overflow-hidden rounded border border-slate-200 bg-white">
-              {v.heroImageUrl ? (
-                <div className="h-28 w-full bg-cover bg-center" style={{ backgroundImage: `url(${v.heroImageUrl})` }} />
-              ) : null}
-
-              <div className="p-4 space-y-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-900">{v.name}</h3>
-                    <p className="text-xs text-slate-600">
-                      {v.suburb} ({v.postcode}) • {v.categories.join(", ")}
-                    </p>
-                  </div>
-                  <div className="text-xs text-slate-600 text-right">
-                    <div>{v.pickup ? "Pickup" : ""}</div>
-                    <div>{v.delivery ? "Delivery" : ""}</div>
-                  </div>
-                </div>
-                <p className="text-sm text-slate-700 leading-relaxed">{v.blurb}</p>
-                <div className="flex gap-2">
-                  <Link href={`/vendor/${v.id}`} className="flex-1 rounded border border-slate-200 px-3 py-2 text-sm hover:bg-slate-50">
-                    View store
-                  </Link>
-                  <Link
-                    href={`/checkout?vendorId=${v.id}`}
-                    className="rounded bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800"
-                  >
-                    Checkout
-                  </Link>
-                </div>
-              </div>
-            </article>
+      {vendors.length === 0 ? (
+        <p>No vendors match that postcode/category. Try "All categories".</p>
+      ) : (
+        <div
+          style={{
+            display: "grid",
+            gap: 16,
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          }}
+        >
+          {vendors.map((v) => (
+            <a
+              key={v.id}
+              href={`/vendor/${v.id}`}
+              style={{
+                display: "block",
+                border: "1px solid #ddd",
+                borderRadius: 12,
+                padding: 16,
+                textDecoration: "none",
+                color: "inherit",
+              }}
+            >
+              <h2 style={{ marginBottom: 8 }}>{v.name}</h2>
+              <p style={{ marginBottom: 6 }}>{v.suburb}, {v.postcode}</p>
+              <p style={{ marginBottom: 6 }}>{v.category}</p>
+              {v.description ? <p>{v.description}</p> : null}
+            </a>
           ))}
         </div>
-
-        {results.length === 0 ? (
-          <div className="mt-6 rounded border border-slate-200 bg-white p-4 text-sm text-slate-700">
-            No vendors found. Try a different postcode or category.
-          </div>
-        ) : null}
-      </section>
-    </div>
+      )}
+    </main>
   );
 }

@@ -1,0 +1,53 @@
+[
+  {
+    "id": "test",
+    "name": "test",
+    "suburb": "test",
+    "postcode": "test",
+    "category": "fruit-veg",
+    "description": "",
+    "image": "",
+    "products": [
+      {
+        "id": "bananas-1kg-0-1773360700758",
+        "name": "Bananas 1kg",
+        "price": 4.99,
+        "category": "fruit-veg",
+        "image": "https://example.com/images/bananas.jpg",
+        "description": "Fresh Cavendish bananas"
+      },
+      {
+        "id": "tomatoes-1kg-1-1773360700758",
+        "name": "Tomatoes 1kg",
+        "price": 6.5,
+        "category": "fruit-veg",
+        "image": "https://example.com/images/tomatoes.jpg",
+        "description": "Ripe local tomatoes"
+      },
+      {
+        "id": "chicken-breast-500g-2-1773360700758",
+        "name": "Chicken Breast 500g",
+        "price": 9.9,
+        "category": "meat",
+        "image": "https://example.com/images/chicken.jpg",
+        "description": "Lean chicken breast"
+      },
+      {
+        "id": "atlantic-salmon-fillet-3-1773360700758",
+        "name": "Atlantic Salmon Fillet",
+        "price": 14.5,
+        "category": "seafood",
+        "image": "https://example.com/images/salmon.jpg",
+        "description": "Fresh Atlantic salmon fillet"
+      },
+      {
+        "id": "sourdough-loaf-4-1773360700758",
+        "name": "Sourdough Loaf",
+        "price": 7,
+        "category": "bakery",
+        "image": "https://example.com/images/sourdough.jpg",
+        "description": "Handmade sourdough bread"
+      }
+    ]
+  }
+]
