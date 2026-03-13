@@ -72,12 +72,19 @@ export default function VendorLoginPage() {
         textAlign: "center",
         padding: "0 24px"
       }}>
-        <p style={{ fontSize: 14, color: "#525252", marginBottom: 12 }}>
+        <p style={{ fontSize: 14, color: "#525252", marginBottom: 16 }}>
           Not registered yet?
         </p>
-        <p style={{ fontSize: 14, color: "#a3a3a3", lineHeight: 1.6 }}>
+        <Link 
+          href="/vendor/signup" 
+          className="secondaryBtn"
+          style={{ display: "inline-flex" }}
+        >
+          Join Local Pantry - $14.99/month
+        </Link>
+        <p style={{ fontSize: 13, color: "#a3a3a3", lineHeight: 1.6, marginTop: 12 }}>
           Get discovered by locals with a simple, beautiful online storefront.
-          Contact us to join the Local Pantry marketplace.
+          14-day free trial included.
         </p>
       </div>
     </div>

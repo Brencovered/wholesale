@@ -14,7 +14,8 @@ type CartItem = {
   name: string;
   price: number;
   quantity: number;
-  vendorId?: string;
+  vendorId: string;
+  vendorName: string;
 };
 
 type CartContextValue = {
