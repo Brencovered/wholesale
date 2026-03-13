@@ -1,95 +1,258 @@
 import Link from "next/link";
 import SearchForm from "./components/SearchForm";
-import { listCategories } from "./lib/vendors-shared";
+import { listCategories, CATEGORY_OPTIONS } from "./lib/vendors-shared";
+import "./home.css";
 
-const HERO =
-  "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1600&q=80";
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=1600&q=80";
+
+const CATEGORY_IMAGES: Record<string, string> = {
+  "fruit-veg":
+    "https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=800&q=80",
+  meat: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=800&q=80",
+  seafood:
+    "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=800&q=80",
+  bakery:
+    "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80",
+  dairy:
+    "https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=800&q=80",
+  pantry:
+    "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?auto=format&fit=crop&w=800&q=80",
+};
 
 export default function HomePage() {
-  const categories = listCategories();
+  const categories = CATEGORY_OPTIONS.filter((c) => c.key !== "all");
 
   return (
-    <div className="mx-auto max-w-6xl px-4 md:px-6 space-y-10">
-      <section className="grid gap-6 md:grid-cols-[1.05fr,0.95fr] items-stretch">
-        <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-amber-50" />
-
-          <div className="relative p-6 md:p-8">
-            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-950">
-              Discover fresh food near you
-            </h1>
-            <p className="mt-3 text-slate-700 leading-relaxed max-w-prose">
-              Find local fruit & veg shops, butchers, seafood markets, delis, and specialty grocers.
-              Support independents, get better prices, and stay out of the duopoly.
-            </p>
-
-            <div className="mt-5 rounded-2xl border border-emerald-100 bg-white/80 backdrop-blur p-4 shadow-sm">
-              <p className="mb-2 text-sm font-medium text-slate-800">
-                Search by postcode + category
-              </p>
-              <SearchForm />
-            </div>
-
-            <div className="mt-4 flex flex-wrap gap-2 text-sm">
-              {categories.map((c) => (
-                <Link
-                  key={c.key}
-                  className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-3 py-2 text-emerald-900 shadow-sm hover:bg-emerald-100"
-                  href={`/search?category=${c.key}`}
-                >
-                  <span aria-hidden="true">
-                    {c.key === "fruit" || c.key === "veg"
-                      ? "🥬"
-                      : c.key === "meat"
-                      ? "🥩"
-                      : c.key === "seafood"
-                      ? "🐟"
-                      : "🧀"}
-                  </span>
-                  {c.label}
-                </Link>
-              ))}
-            </div>
+    <div className="homePage">
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="heroContent">
+          <span className="heroLabel">Melbourne's Local Food Network</span>
+          <h1 className="heroTitle">
+            Fresh food,
+            <br />
+            from your
+            <br />
+            neighbourhood.
+          </h1>
+          <p className="heroDesc">
+            Discover independent greengrocers, butchers, seafood markets, and
+            specialty food stores. Skip the supermarket duopoly, support local
+            businesses, and eat better.
+          </p>
+          <div className="heroCta">
+            <Link href="/search" className="ctaPrimary">
+              Find vendors near you
+            </Link>
+            <Link href="#how-it-works" className="ctaSecondary">
+              How it works
+            </Link>
           </div>
         </div>
-
-        <div className="relative rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+        <div className="heroImageWrap">
           <img
-            src={HERO}
-            alt="Fresh produce at a local market"
-            className="h-full w-full object-cover"
+            src={HERO_IMAGE}
+            alt="Fresh local produce beautifully arranged"
+            className="heroImage"
           />
-          <div className="absolute inset-0 bg-emerald-950/10" />
         </div>
       </section>
 
-      <section>
-        <h2 className="text-lg font-semibold text-slate-900">How it works</h2>
-        <div className="mt-3 grid gap-3 md:grid-cols-3">
-          {[
-            {
-              title: "Search local",
-              body: "Search by postcode + category to find vendors near you.",
-            },
-            {
-              title: "Pick vendors",
-              body: "Each vendor manages their stock, pricing, deals and images.",
-            },
-            {
-              title: "Pickup or delivery",
-              body: "Checkout for pickup or vendor delivery (if they offer it).",
-            },
-          ].map((s) => (
-            <div
-              key={s.title}
-              className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+      {/* Stats Bar */}
+      <section className="statsBar">
+        <div className="statItem">
+          <span className="statValue">50+</span>
+          <span className="statLabel">Local Vendors</span>
+        </div>
+        <div className="statDivider" />
+        <div className="statItem">
+          <span className="statValue">9</span>
+          <span className="statLabel">Categories</span>
+        </div>
+        <div className="statDivider" />
+        <div className="statItem">
+          <span className="statValue">100%</span>
+          <span className="statLabel">Independent</span>
+        </div>
+        <div className="statDivider" />
+        <div className="statItem">
+          <span className="statValue">Melbourne</span>
+          <span className="statLabel">Wide Coverage</span>
+        </div>
+      </section>
+
+      {/* Search Section */}
+      <section className="searchSection">
+        <div className="searchHeader">
+          <h2 className="sectionTitle">Find your local vendors</h2>
+          <p className="sectionDesc">
+            Search by postcode to discover quality food shops in your area
+          </p>
+        </div>
+        <div className="searchCard">
+          <SearchForm />
+        </div>
+      </section>
+
+      {/* Categories Grid */}
+      <section className="categoriesSection">
+        <div className="sectionHeader">
+          <h2 className="sectionTitle">Browse by category</h2>
+          <p className="sectionDesc">
+            Explore our curated selection of local food categories
+          </p>
+        </div>
+        <div className="categoriesGrid">
+          {categories.slice(0, 6).map((category) => (
+            <Link
+              key={category.key}
+              href={`/search?category=${category.key}`}
+              className="categoryCard"
             >
-              <h3 className="text-sm font-semibold text-slate-900">{s.title}</h3>
-              <p className="mt-2 text-sm text-slate-700 leading-relaxed">{s.body}</p>
-            </div>
+              <div className="categoryImageWrap">
+                <img
+                  src={CATEGORY_IMAGES[category.key] || HERO_IMAGE}
+                  alt={category.label}
+                  className="categoryImage"
+                />
+              </div>
+              <div className="categoryContent">
+                <h3 className="categoryName">{category.label}</h3>
+                <span className="categoryArrow">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
+        <div className="categoriesMore">
+          <Link href="/search" className="viewAllLink">
+            View all categories
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
       </section>
+
+      {/* How It Works */}
+      <section className="howSection" id="how-it-works">
+        <div className="sectionHeader">
+          <h2 className="sectionTitle">How it works</h2>
+          <p className="sectionDesc">
+            Simple steps to connect with your local food community
+          </p>
+        </div>
+        <div className="stepsGrid">
+          <div className="stepCard">
+            <div className="stepNumber">1</div>
+            <h3 className="stepTitle">Search your area</h3>
+            <p className="stepDesc">
+              Enter your postcode to discover independent food vendors near you.
+              Filter by category to find exactly what you need.
+            </p>
+          </div>
+          <div className="stepCard">
+            <div className="stepNumber">2</div>
+            <h3 className="stepTitle">Browse and compare</h3>
+            <p className="stepDesc">
+              View vendor profiles, check their latest stock, compare prices,
+              and discover weekly specials from local shops.
+            </p>
+          </div>
+          <div className="stepCard">
+            <div className="stepNumber">3</div>
+            <h3 className="stepTitle">Order your way</h3>
+            <p className="stepDesc">
+              Add items to your basket and checkout for pickup, or delivery
+              where available. Support local with every purchase.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Value Props */}
+      <section className="valueSection">
+        <div className="valueGrid">
+          <div className="valueCard valueCardDark">
+            <h3 className="valueTitle">Support independent businesses</h3>
+            <p className="valueDesc">
+              Every purchase goes directly to local, family-owned shops. No
+              middlemen, no supermarket margins.
+            </p>
+          </div>
+          <div className="valueCard">
+            <h3 className="valueTitle">Better quality, better prices</h3>
+            <p className="valueDesc">
+              Fresh produce straight from the source. Skip the supply chain and
+              get food at its peak.
+            </p>
+          </div>
+          <div className="valueCard">
+            <h3 className="valueTitle">Build your food community</h3>
+            <p className="valueDesc">
+              Connect with passionate vendors who know their products. Get
+              recommendations, recipes, and expertise.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="ctaSection">
+        <h2 className="ctaTitle">Ready to shop local?</h2>
+        <p className="ctaDesc">
+          Join thousands of Melbournians discovering their local food network.
+        </p>
+        <div className="ctaButtons">
+          <Link href="/search" className="ctaPrimary">
+            Start exploring
+          </Link>
+          <Link href="/vendor/login" className="ctaSecondary">
+            List your business
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footerContent">
+          <div className="footerBrand">
+            <div className="footerLogo" />
+            <span className="footerName">Local Pantry</span>
+          </div>
+          <nav className="footerNav">
+            <Link href="/search">Search</Link>
+            <Link href="/account">Account</Link>
+            <Link href="/vendor/login">For Vendors</Link>
+            <Link href="/admin">Admin</Link>
+          </nav>
+          <p className="footerCopy">
+            Melbourne's local food network. Built with care.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
